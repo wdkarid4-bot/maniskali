@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        footer a {
+    color: #ffffff; /* Mengubah warna teks link menjadi putih */
+    text-decoration: none; /* (Opsional) Menghilangkan garis bawah pada link */
+}
+
+/* Biar makin keren, kasih efek saat kursor menempel (hover) */
+footer a:hover {
+    color: #cccccc; /* Berubah jadi abu-abu muda saat disentuh kursor */
+    text-decoration: underline; /* Muncul garis bawah saat di-hover */
+}
+        .luxury-footer {
+    margin-top: 100px; /* Jarak dari tombol ditinggikan agar lebih ke bawah */
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #ffffff; 
+    animation: fadeInUp 1.5s ease-out;
+}
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- BACKGROUND EFFECT (Partikel Mengambang) --- */
+        .bg-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, #FFD700, #E0E0E0);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        /* Ganti ukuran & posisi partikel secara acak */
+        .particle:nth-child(1) { width: 10px; height: 10px; left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 15px; height: 15px; left: 85%; top: 15%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 8px; height: 8px; left: 75%; top: 75%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 12px; height: 12px; left: 20%; top: 80%; animation-delay: 1s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.2; }
+            50% { transform: translateY(-30px) scale(1.2); opacity: 0.6; filter: blur(1px); }
+        }
+
+        /* --- CONTAINER UTAMA --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* --- LOGO --- */
+        .logo-wrapper {
+            margin-bottom: 25px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            width: 150px; /* Sesuaikan ukuran logo */
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- BANNER (500x500) --- */
+        .banner-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            aspect-ratio: 1 / 1; /* Memastikan rasio tetap 500x500 persegi */
+            margin-bottom: 40px;
+            border-radius: 20px;
+            padding: 4px; /* Space untuk border gradasi */
+            background: linear-gradient(135deg, #FFD700, #555, #E0E0E0, #FFEA00);
+            background-size: 300% 300%;
+            animation: glowShift 6s ease infinite, fadeInUp 1s ease-out;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.15);
+        }
+
+        .banner-content {
+            width: 100%;
+            height: 100%;
+            background: #111;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Memotong gambar agar pas di 500x500 tanpa distorsi */
+        }
+
+        /* --- BUTTON GROUP --- */
+        .btn-group {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        /* Base Luxury Button */
+        .btn {
+            position: relative;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 1. BUTTON EMAS/KUNING (Glow & Slide Effect) */
+        .btn-gold {
+            background: linear-gradient(135deg, #FFEA00 0%, #FFD700 100%);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: 0.6s;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(255, 234, 0, 0.5);
+        }
+
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        /* 2. BUTTON SILVER (Metallic & Border Shine Effect) */
+        .btn-silver {
+            background: transparent;
+            color: #E0E0E0;
+            border: 2px solid #E0E0E0;
+        }
+
+        .btn-silver:hover {
+            color: #000;
+            background: #E0E0E0;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(224, 224, 224, 0.3);
+        }
+
+        /* 3. BUTTON GELAP/NEON (Premium Minimalist Effect) */
+        .btn-dark {
+            background: #161616;
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-dark:hover {
+            background: transparent;
+            border-color: #FFEA00;
+            color: #FFEA00;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: inset 0 0 15px rgba(255, 234, 0, 0.2), 0 10px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        /* --- ANIMASI --- */
+        @keyframes glowShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Efek Partikel di Background -->
+    <div class="bg-effect">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <!-- Logo di atas Banner -->
+        <div class="logo-wrapper">
+            <!-- Ganti src dengan link logo kamu (.png atau .gif transparan lebih bagus) -->
+            <img src="kari4d1.gif" alt="Logo" class="logo">
+        </div>
+
+        <!-- Banner Kotak 500x500 -->
+        <div class="banner-wrapper">
+            <div class="banner-content">
+            
+                <img src="banner.png" alt="Luxury Banner">
+            </div>      
+        </div>
+
+        <!-- Tiga Tombol Mewah -->
+        <div class="btn-group">
+            <a href="https://rb.gy/1c6ovo" class="btn btn-gold">MASUK</a>
+            <a href="https://rb.gy/1c6ovo" class="btn btn-silver">DAFTAR</a>
+            <a href="https://direct.lc.chat/15020553" class="btn btn-dark">LIVE CHAT</a>
+        </div>
+        <footer class="luxury-footer">
+    <p>&copy; 2026 KARI4D <a href="https://rb.gy/1c6ovo" target="_blank">KIBOWWW</a>
+</footer>
+    </div>
+
+</body>
+</html>
